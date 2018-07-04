@@ -4,13 +4,14 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.practise.model.StudentModel;
+import com.practise.model.Student;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/")
@@ -18,15 +19,17 @@ public class Controller {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String newRegistration(ModelMap model) {
-		StudentModel studentModel = new StudentModel();
-		model.addAttribute("student",studentModel);
+		Student student = new Student();
+		model.addAttribute("student",student);
 		return "enroll";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveRegistration(@Valid StudentModel student,BindingResult result,ModelMap model) {
+	public String saveRegistration(@Valid  Student student,BindingResult result,Model model) {
 		if(result.hasErrors()) {
+			result.reject("firstName", "error");
 			model.addAttribute("student",student);
+			String a = result.getFieldError("LastName").toString();
 			return "enroll";
 		}
 		

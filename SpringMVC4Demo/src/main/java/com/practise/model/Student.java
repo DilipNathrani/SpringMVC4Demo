@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author Dilip
  *
  */
-public class StudentModel implements  Serializable{
+public class Student implements  Serializable{
 	/**
 	 * 
 	 */
